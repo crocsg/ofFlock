@@ -1,12 +1,1 @@
-﻿  Boid.cpp
-  BoidBehaviourFastLambda.cpp
-  BoidBehaviourStd.cpp
-  BoidController.cpp
-  IBoidBehaviour.cpp
-  main.cpp
-  ofApp.cpp
-     Creating library bin\flock.lib and object bin\flock.exp
-  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
-  flock.vcxproj -> I:\home\of_v0.9.8_vs_release\apps\ofFlock\flock\bin\flock.exe
-  
-  	                   9	I:\home\of_v0.9.8_vs_release\export\vs\Win32\
+﻿

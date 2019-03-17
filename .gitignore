@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+flock/obj/Release/flock.Build.CppClean.log
+flock.VC.VC.opendb
