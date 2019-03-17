@@ -50,3 +50,4 @@ flock/obj/Release/icon.res
 flock/obj/Release/vc140.pdb
 flock/obj/Release/flock.log
 flock/obj/Release/flock.log
+*.tlog
