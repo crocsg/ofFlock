@@ -1,0 +1,12 @@
+﻿  Boid.cpp
+  BoidBehaviourFastLambda.cpp
+  BoidBehaviourStd.cpp
+  BoidController.cpp
+  IBoidBehaviour.cpp
+  main.cpp
+  ofApp.cpp
+     Creating library bin\flock_debug.lib and object bin\flock_debug.exp
+  flock.vcxproj -> I:\home\of_v0.9.8_vs_release\apps\flock\flock\bin\flock_debug.exe
+  flock.vcxproj -> bin\flock_debug.pdb (Full PDB)
+  
+  	                   9	I:\home\of_v0.9.8_vs_release\export\vs\Win32\
