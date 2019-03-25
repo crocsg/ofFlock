@@ -3,8 +3,10 @@
 #ifndef __BOID_H
 #define __BOID_H
 
+#include <deque>
 #include <ofVec2f.h>
 #include <ofColor.h>
+
 
 class IBoidBehaviour;
 
@@ -17,6 +19,7 @@ public:
 public:
 	void prepare_update(std::vector<const CBoid*>& pboids, int n);
 	void update();
+	void update_tail(ofVec2f& pos);
 
 public:
 	const ofVec2f&	get_position()	{ return m_position; }
@@ -36,6 +39,8 @@ public:
 
 	float	m_hue;
 	float	m_target_hue;
+	
+	std::deque<ofVec2f> m_tail;
 
 	IBoidBehaviour* m_pbehaviour;
 	

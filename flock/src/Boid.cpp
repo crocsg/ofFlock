@@ -3,6 +3,7 @@
 #include "Boid.h"
 #include "IBoidBehaviour.h"
 
+#define TAIL_SIZE 24
 
 CBoid::CBoid()
 {
@@ -21,7 +22,8 @@ void CBoid::prepare_update(std::vector<const CBoid*>& pboids, int nimg)
 
 void CBoid::update()
 {
-	
+	update_tail(m_position);
+
 	m_position += m_speed;
 	m_speed += m_accel;
 
@@ -29,4 +31,11 @@ void CBoid::update()
 
 	if (m_pbehaviour != NULL)
 		m_pbehaviour->update(this);
+}
+
+void CBoid::update_tail(ofVec2f& p)
+{
+	m_tail.push_front(p);
+	while (m_tail.size() > TAIL_SIZE)
+		m_tail.pop_back();
 }

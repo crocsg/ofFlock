@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-#define NB_BOID 200*3
+#define NB_BOID 100*3
 #define BOID_MAX_SPEED 10
 
 //--------------------------------------------------------------
@@ -128,6 +128,20 @@ void ofApp::drawBoid()
 		ofDrawLine(boid.m_position, boid.m_position + boid.m_speed * 2);
 	};
 
+	auto filldrawtail = [](CBoid& boid)
+	{
+		ofColor c;
+		c.setHsb(boid.get_hue() + 10, 255, 255);
+		ofSetColor(c);
+		ofDrawCircle(boid.m_position.x, boid.m_position.y, 2);
+		ofDrawLine(boid.m_position, boid.m_position + boid.m_speed * 2);
+
+		for (auto it = boid.m_tail.begin(); it != boid.m_tail.end(); it++)
+		{
+			ofDrawCircle(it->x, it->y, 2);
+		}
+	};
+
 	auto slicedrawcircle = [](std::vector<CBoid>::iterator begin, std::vector<CBoid>::iterator end)
 	{
 		ofColor c;
@@ -167,7 +181,7 @@ void ofApp::drawBoid()
 
 	ofNoFill();
 	ofSetCircleResolution(90);
-	m_boids.draw(filldraw);
+	m_boids.draw(filldrawtail);
 	//m_boids.draw_slice(3, slicedrawcircle);
 }
 

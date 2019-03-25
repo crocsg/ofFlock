@@ -17,7 +17,7 @@ CBoidBehaviourFastLambda::CBoidBehaviourFastLambda()
 		ofVec2f g = ofVec2f(1920/4 - x, 1080/2 - y);
 		ofVec2f g2 = ofVec2f((1920 - 1920 / 4)  - x, (1080 - 1080 / 2)  - y);
 
-		g += g2 * 0.6;
+		//g += g2 * 0.8;
 		g.normalize();
 		//g.y += 2 * sin(x*PI / 720);
 		//g.x = 1;
