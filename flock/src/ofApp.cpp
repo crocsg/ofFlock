@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-#define NB_BOID 800*3
+#define NB_BOID 200*3
 #define BOID_MAX_SPEED 10
 
 //--------------------------------------------------------------
@@ -122,7 +122,7 @@ void ofApp::drawBoid()
 	auto filldraw = [](CBoid& boid)
 	{
 		ofColor c;
-		c.setHsb(boid.get_hue() + 10, 255, 255, 128);
+		c.setHsb(boid.get_hue() + 10, 255, 255);
 		ofSetColor(c);
 		ofDrawCircle(boid.m_position.x, boid.m_position.y, 2);
 		ofDrawLine(boid.m_position, boid.m_position + boid.m_speed * 2);

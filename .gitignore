@@ -51,3 +51,4 @@ flock/obj/Release/vc140.pdb
 flock/obj/Release/flock.log
 flock/obj/Release/flock.log
 *.tlog
+flock.VC.db
