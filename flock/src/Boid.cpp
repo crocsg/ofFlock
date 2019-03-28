@@ -3,7 +3,7 @@
 #include "Boid.h"
 #include "IBoidBehaviour.h"
 
-#define TAIL_SIZE 24
+#define TAIL_SIZE 8
 
 CBoid::CBoid()
 {

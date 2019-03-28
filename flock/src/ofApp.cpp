@@ -1,13 +1,13 @@
 #include "ofApp.h"
 
-#define NB_BOID 100*3
+#define NB_BOID 300*3
 #define BOID_MAX_SPEED 10
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	//ofSetupOpenGL(1024, 768, OF_WINDOW);
 	ofSetFrameRate(60);
-		
+			
 	//m_pbehaviour = new CBoidBehaviourStd();
 	m_pbehaviour = new CBoidBehaviourFastLambda();
 	for (int i = 0; i < NB_BOID; i++)
@@ -20,6 +20,8 @@ void ofApp::setup(){
 
 	m_boids.set_screen_size(ofGetWidth(), ofGetHeight());
 	m_pbehaviour->set_screenSize(ofGetWidth(), ofGetHeight());
+
+	m_draw_vfield = false;
 }
 
 //--------------------------------------------------------------
@@ -35,6 +37,18 @@ void ofApp::draw(){
 	ofSetColor(ofColor::white);
 	ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), 10, 10);
 
+	if (m_draw_vfield)
+	{
+		for (int y = 0; y < ofGetHeight(); y+= 32)
+		{
+			for (int x = 0; x < ofGetWidth(); x+=32)
+			{
+				ofVec2f v = ((CBoidBehaviourFastLambda*)m_pbehaviour)->get_vec_field().getFieldVec(x, y);
+				ofDrawArrow(ofVec2f(x, y), ofVec2f(x, y) + v * 10, 3);
+			}
+		}
+	}
+
 	drawBoid();
 }
 
@@ -48,6 +62,12 @@ void ofApp::keyPressed(int key){
 		});
 	}
 	*/
+
+	if ('v' == key)
+	{
+		// toggle vector field view
+		m_draw_vfield = !m_draw_vfield;
+	}
 }
 
 //--------------------------------------------------------------
@@ -122,7 +142,7 @@ void ofApp::drawBoid()
 	auto filldraw = [](CBoid& boid)
 	{
 		ofColor c;
-		c.setHsb(boid.get_hue() + 10, 255, 255);
+		c.setHsb(boid.get_hue() + 10, 255, 128);
 		ofSetColor(c);
 		ofDrawCircle(boid.m_position.x, boid.m_position.y, 2);
 		ofDrawLine(boid.m_position, boid.m_position + boid.m_speed * 2);
@@ -131,9 +151,9 @@ void ofApp::drawBoid()
 	auto filldrawtail = [](CBoid& boid)
 	{
 		ofColor c;
-		c.setHsb(boid.get_hue() + 10, 255, 255);
+		c.setHsb(boid.get_hue(), 255, 255);
 		ofSetColor(c);
-		ofDrawCircle(boid.m_position.x, boid.m_position.y, 2);
+		ofDrawCircle(boid.m_position.x, boid.m_position.y, 4);
 		ofDrawLine(boid.m_position, boid.m_position + boid.m_speed * 2);
 
 		for (auto it = boid.m_tail.begin(); it != boid.m_tail.end(); it++)
@@ -179,8 +199,8 @@ void ofApp::drawBoid()
 	};
 
 
-	ofNoFill();
-	ofSetCircleResolution(90);
+	ofFill();
+	ofSetCircleResolution(8);
 	m_boids.draw(filldrawtail);
 	//m_boids.draw_slice(3, slicedrawcircle);
 }

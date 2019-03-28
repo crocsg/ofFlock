@@ -11,20 +11,23 @@ std::vector<const CBoid*> CBoidBehaviourFastLambda::m_separation_pop;
 
 CBoidBehaviourFastLambda::CBoidBehaviourFastLambda()
 {
-	m_vecfield.open(1920 * 2, 1080 * 2);
+	m_vecfield.open(1920, 1080);
 	m_vecfield.setup([](float x, float y)->ofVec2f 
 	{
-		ofVec2f g = ofVec2f(1920/4 - x, 1080/2 - y);
-		ofVec2f g2 = ofVec2f((1920 - 1920 / 4)  - x, (1080 - 1080 / 2)  - y);
+		ofVec2f g = ofVec2f(1920/6 - x, 1080/3 - y);
+		ofVec2f g2 = ofVec2f((1920 - 1920 / 2)  - x, (1080 - 1080 / 3)  - y);
 
-		//g += g2 * 0.8;
 		g.normalize();
-		//g.y += 2 * sin(x*PI / 720);
+		g2.normalize();
+
+		g = g + (g2 * 1.0);
+		
+		//g.y = -1.0 * sin(x*PI / 128);
 		//g.x = 1;
 		g.normalize();
 		return (g);
 	}, 
-		ofVec2f(2, 2), ofVec2f(0, 0));
+		ofVec2f(1.0, 1.0), ofVec2f(0, 0));
 }
 
 
@@ -187,7 +190,7 @@ ofVec2f CBoidBehaviourFastLambda::update_similarity(CBoid * pboid, std::vector<c
 			cnt++;
 		}
 
-		if (pboid->m_group != (*it)->m_group)
+		if (pboid->m_group == (*it)->m_group)
 		{
 			hue += (*it)->m_target_hue;
 			cnt_hue++;
@@ -210,6 +213,14 @@ ofVec2f CBoidBehaviourFastLambda::update_similarity(CBoid * pboid, std::vector<c
 		hue /= (float)cnt_hue;
 		//hue = 25;
 		hue = (9. * pboid->m_hue + hue) / 10;
+		/*
+		if (cnt_hue > 12)
+			hue += 14;
+		else if (cnt_hue > 8)
+			hue += 10.0;
+			*/
+		if (cnt_hue > 2)
+			hue += ((float) cnt_hue / 10.);
 		pboid->m_hue = hue;
 		
 	}

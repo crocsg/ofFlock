@@ -32,7 +32,9 @@ public:
 	virtual void update(CBoid* pboid) override;
 	virtual void set_screenSize(float xsize, float ysize) override;
 
-	
+	CVectorField2D& get_vec_field() {
+		return m_vecfield;
+	}
 
 private:
 	ofVec2f	update_gravity(CBoid * pboid);

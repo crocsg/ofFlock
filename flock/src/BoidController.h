@@ -36,8 +36,8 @@ public:
 		boid.m_speed.x = ofRandomf() * speed_limit;
 		boid.m_speed.y = ofRandomf() * speed_limit;
 		boid.m_pbehaviour = pbehaviour;
-		boid.m_group = n % 4;
-		boid.m_hue = boid.m_target_hue = 0 + (boid.m_group * 12);
+		boid.m_group = 0;// n % 4;
+		boid.m_hue = boid.m_target_hue = 0 + ((n%3)  * 12);
 
 		return boid;
 	}

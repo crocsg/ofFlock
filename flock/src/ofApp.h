@@ -32,8 +32,8 @@ class ofApp : public ofBaseApp{
 
 protected:
 		
-
-		CBoidBehaviourStd	m_behaviour;
+		bool				m_draw_vfield;
+		
 		IBoidBehaviour*		m_pbehaviour;
 		CBoidController		m_boids;
 
